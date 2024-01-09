@@ -8,10 +8,13 @@ struct Person {
 
 int main() {
 
-  struct Person p; 
+  struct Person p[3]; 
 
-  cin >> p.id >> p.name >> p.fName >> p.mName;
-  cout << p.id <<" "<< p.name << " " << p.fName << " " << p.mName;
+  for(int i=0; i<3; i++)
+    cin >> p[i].id >> p[i].name >> p[i].fName >> p[i].mName;
+
+  for(int i=0; i<3; i++)
+    cout << p[i].id <<" "<< p[i].name << " " << p[i].fName << " " << p[i].mName << endl;
 
 
 
