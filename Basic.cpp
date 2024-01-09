@@ -1,12 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main() {
+struct Person {
   long long id;
   string name, fName, mName;
+};
 
-  cin >> id >> name >> fName >> mName;
-  cout << id <<" "<< name << " " << fName << " " << mName;
+int main() {
+
+  struct Person p; 
+
+  cin >> p.id >> p.name >> p.fName >> p.mName;
+  cout << p.id <<" "<< p.name << " " << p.fName << " " << p.mName;
 
 
 
