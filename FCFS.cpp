@@ -22,7 +22,7 @@ void printTable(struct Process p[], int n) {
 
 int main() {
     freopen("input.txt", "r", stdin);
-    int n, sum_wt = 0;
+    int n, sum_wt = 0, idle_sum = 0;
     cin >> n;
     struct Process p[n];
     // Taking input
@@ -48,8 +48,15 @@ int main() {
             p[i].st = p[i].at;
             p[i].ct = p[i].bt;
         } else {
-            p[i].st = p[i-1].ct;
-            p[i].ct = p[i].st + p[i].bt;
+            if(p[i].at > p[i-1].ct) {
+                // idle period
+                p[i].st = p[i].at;
+                p[i].ct = p[i].st + p[i].bt;
+                idle_sum += p[i].at - p[i-1].ct;
+            } else {
+                p[i].st = p[i-1].ct;
+                p[i].ct = p[i].st + p[i].bt;
+            }
         }
         p[i].wt = p[i].st - p[i].at;
         p[i].tt = p[i].wt + p[i].bt;
@@ -61,6 +68,7 @@ int main() {
 
    cout << endl;
    cout << "AWT = " << (float)sum_wt / n << endl; 
+   cout << "Idle Time = " << idle_sum << endl; 
   
     return 0;
 }
