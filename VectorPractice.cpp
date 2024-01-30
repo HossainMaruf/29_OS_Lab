@@ -8,26 +8,23 @@ int main() {
     vec.push_back(100);
     vec.push_back(1);
 
-    cout << vec[0] << endl; // 10
-    cout << vec[1] << endl; // 89
-    cout << vec[3] << endl; // 1
-
-    cout <<"Size: " <<  vec.size() << endl;
-    for(int i=0; i<vec.size(); i++) {
-        cout << vec[i] << endl;
+    for(auto itr = vec.begin(); itr != vec.end(); itr++) {
+        cout << *itr << endl;
     }
-    cout << *(&vec[0]) << endl;
-    // cout << &vec[1] << endl;
-    cout << *vec.begin() << endl;
+
+    vec.erase(vec.begin());
+    vec.erase(vec.begin() + 1);
+    vec.erase(vec.begin() + 2);
+    vec.erase(vec.begin() + 3);
+
     cout << endl;
 
-    // cout << *(&vec[vec.size() -1]) << endl;
-    // cout << *vec.end() << endl;
-    cout << &vec[0] + 1 << endl;
-    cout << &vec[1] << endl;
+    for(auto itr = vec.begin(); itr != vec.end(); itr++) {
+        // cout << vec.erase(itr) << endl;
+        vec.erase(itr);
+    }
 
-    cout << &vec[vec.size()] - &vec[0]<< endl;
-    // cout << vec.end() - vec.begin() << endl;
+    cout << vec.empty() << endl;
 
 
 
