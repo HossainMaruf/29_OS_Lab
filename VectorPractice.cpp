@@ -1,32 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+struct Process {
+    int id, at, bt, st, ct, wt, tt;
+};
+bool comp(struct Process p1, struct Process p2) {
+    if(p1.at < p2.at) return true;
+    else return false;
+}
+void printProcess(struct Process p[], int n) {
+  for(int i=0; i<n; i++) {
+        cout << p[i].id << " " << p[i].at << " " << p[i].bt << endl;
+    }
+}
+void printTable(struct Process p[], int n) {
+    cout << "ID\tAT\tBT\tST\tCT\tWT\tTT" << endl;
+    for(int i=0; i<n; i++) {
+        cout << p[i].id << "\t" << p[i].at << "\t" << p[i].bt << "\t" << p[i].st << "\t" << p[i].ct << "\t" << p[i].wt << "\t" << p[i].tt << endl;
+    }
+}
+
 int main() {
-    vector<int> vec;
-    vec.push_back(10);
-    vec.push_back(89);
-    vec.push_back(100);
-    vec.push_back(1);
-
-    for(auto itr = vec.begin(); itr != vec.end(); itr++) {
-        cout << *itr << endl;
+    freopen("input.txt", "r", stdin);
+    int n, sum_wt = 0, idle_sum = 0;
+    cin >> n;
+    struct Process p[n];
+    // Taking input
+    for(int i=0; i<n; i++) {
+        cin >> p[i].id >> p[i].at >> p[i].bt;
     }
+    vector<struct Process*> ready_queue;
+    ready_queue.push_back(&p[0]);
 
-    vec.erase(vec.begin());
-    vec.erase(vec.begin() + 1);
-    vec.erase(vec.begin() + 2);
-    vec.erase(vec.begin() + 3);
+    struct Process* selected = ready_queue.front();
+    selected->at = 7;
 
-    cout << endl;
-
-    for(auto itr = vec.begin(); itr != vec.end(); itr++) {
-        // cout << vec.erase(itr) << endl;
-        vec.erase(itr);
-    }
-
-    cout << vec.empty() << endl;
-
-
+    cout << p[0].at << endl;
 
     return 0;
 }
