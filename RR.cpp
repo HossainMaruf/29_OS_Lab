@@ -78,7 +78,6 @@ int main() {
             } else {
                 count++;
             }
-
        }
     }
     printTable(p, n);
