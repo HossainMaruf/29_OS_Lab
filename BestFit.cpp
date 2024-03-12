@@ -35,28 +35,25 @@ int main()
             }
         }
         cout << "File " << i+1 << endl;
+        cout << "Probable Block No: "; 
         for(int t=0; t<v.size(); t++) {
             cout << v[t].block_no << " ";
         }
-        cout << "END" << endl; 
+        cout << endl;
         // Which block is Minimum
-        int minIndex = 0;
+        int minBlock = v.size() > 0 ? v[0].block_no : -1;
         for(int m=1; m<v.size(); m++) {
-        if(v[m].block_size <= v[minIndex].block_size) {
-            minIndex = m;
+            if(v[m].block_size <= v[minBlock-1].block_size) {
+                minBlock = v[m].block_no;
+            }
         }
-        }
-
-        if(i == 1) {
-            cout << minIndex << endl;
-        }
-     
+        cout << "MinBlock: " << minBlock << endl;
+        if(minBlock == -1) continue;
+        minBlock = minBlock-1;
         //Occupy the block
-        if(blocks[minIndex].file_no == 0) {
-            blocks[minIndex].file_no = i+1;
-            blocks[minIndex].file_size = file_size;
-            blocks[minIndex].fragmentation = blocks[minIndex].block_size - file_size;
-        }
+        blocks[minBlock].file_no = i+1;
+        blocks[minBlock].file_size = file_size;
+        blocks[minBlock].fragmentation = blocks[minBlock].block_size - file_size;
     }
 
 
