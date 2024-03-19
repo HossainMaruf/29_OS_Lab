@@ -8,7 +8,7 @@ struct Blocks {
 
 int main()
 {
-    freopen("ff.txt", "r", stdin);
+    freopen("PartitionData.txt", "r", stdin);
     int nb, nf;
     cin >> nb;
     struct Blocks blocks[nb];
@@ -28,10 +28,20 @@ int main()
     for(int i=0; i<nf; i++) {
         int file_size = files[i];
         // Traverse the blocks array
+        int minBlock = -1;
         vector<struct Blocks> v; 
         for(int j=0; j<nb; j++) {
             if((blocks[j].block_size >= file_size) && (blocks[j].file_no == 0)) {
                v.push_back(blocks[j]);
+               if(minBlock == -1) {
+                // First satisfied block
+                minBlock = v[0].block_no;
+               } else {
+                // This is not the first block
+                    if(v[v.size()-1].block_size < blocks[minBlock-1].block_size) {
+                        minBlock = v[v.size()-1].block_no;
+                    }
+               }
             }
         }
         cout << "File " << i+1 << endl;
@@ -40,14 +50,22 @@ int main()
             cout << v[t].block_no << " ";
         }
         cout << endl;
+        /**
+         * 
         // Which block is Minimum
-        int minBlock = v.size() > 0 ? v[0].block_no : -1;
-        for(int m=1; m<v.size(); m++) {
-            if(v[m].block_size <= v[minBlock-1].block_size) {
-                minBlock = v[m].block_no;
-            }
-        }
-        cout << "MinBlock: " << minBlock << endl;
+        // int minBlock = -1;
+        // if(v.size() > 0) {
+        //     minBlock = v[0].block_no;
+        //     for(int m=1; m<v.size(); m++) {
+        //         if((v[m].block_size < blocks[minBlock-1].block_size) && (v[m].file_no == 0)) {
+        //             minBlock = v[m].block_no;
+        //         }
+        //     }
+        // }
+        // cout << "MinBlock: " << minBlock << endl;
+         * 
+        */
+
         if(minBlock == -1) continue;
         minBlock = minBlock-1;
         //Occupy the block

@@ -8,7 +8,7 @@ struct Blocks {
 
 int main()
 {
-    freopen("ff.txt", "r", stdin);
+    freopen("PartitionData.txt", "r", stdin);
     int nb, nf;
     cin >> nb;
     struct Blocks blocks[nb];
